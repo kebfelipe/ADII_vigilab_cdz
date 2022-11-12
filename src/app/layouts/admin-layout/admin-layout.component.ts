@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faEdit, faHouseChimneyWindow, faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faFileContract, faHouseChimneyWindow, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin-layout',
@@ -11,6 +11,7 @@ export class AdminLayoutComponent implements OnInit {
   icon_home = faHouseChimneyWindow;
   icon_register = faEdit;
   icon_off = faPowerOff;
+  icon_file = faFileContract;
 
   constructor() { }
 

@@ -1,0 +1,35 @@
+<h1>
+    Ficha Epidemiológica Integrada <br>
+    <strong>Dengue-Chikungunya-Zika</strong>
+</h1>
+<h2>Ver Ficha</h2>
+<div class="card p-3 m-3">
+    <div class="d-flex flex-row">
+        <p class="p-0 m-0 me-1">Buscar</p>
+        <input type="text" (keyup)="filtrar($event)">
+    </div>
+
+    <div class="mt-1">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>No.</td>
+                    <td>Nombre</td>
+                    <td>DPI</td>
+                    <td>Fecha</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of ficha2">
+                    <td>{{item.no}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.dpi}}</td>
+                    <td>{{item.fecha}}</td>
+                    <td><button class="btn btn-info" (click)="ira()">Ir</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

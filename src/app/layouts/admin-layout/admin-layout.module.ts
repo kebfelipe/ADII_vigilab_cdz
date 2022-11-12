@@ -9,6 +9,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbAlertModule, NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FichaComponent } from 'src/app/pages/ficha/ficha.component';
+import { ManteniminentoComponent } from 'src/app/pages/manteniminento/manteniminento.component';
+import { ReporteComponent } from 'src/app/pages/reporte/reporte.component';
+import { VerfichasComponent } from 'src/app/pages/verfichas/verfichas.component';
 
 @NgModule({
   imports: [
@@ -28,6 +32,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     RegistrarFichaComponent,
     DashboardComponent,
+    VerfichasComponent,
+    FichaComponent,
+    ManteniminentoComponent,
+    ReporteComponent,
   ],
 })
 export class AdminLayoutModule { }
