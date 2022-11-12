@@ -5,48 +5,56 @@
     </h1>
     <h2>Registrar Ficha</h2>
     <div class="d-flex flex-row justify-content-around">
-        <p>Fecha: <strong>09-NOV-2022</strong> </p>
-        <p>No. Ficha <strong>4585</strong></p>
+        <div class="card p-3">
+            <p class="m-0 p-0">Fecha: <strong>09-NOV-2022</strong> </p>
+        </div>
+        <div class="card p-3">
+            <p class="m-0 p-0">No. Ficha <strong>#0</strong></p>
+        </div>
+
     </div>
-    <mat-stepper class="d-flex flex-row flex-wrap w-100">
+    <mat-stepper class="card p-3 mt-2 d-flex flex-row flex-wrap w-100">
         <mat-step>
             <ng-template matStepLabel>Datos Generales</ng-template>
             <h2>Datos Generales</h2>
             <div class="d-flex flex-row flex-wrap">
-                <div class="card me-3">
+                <div class="card p-3 me-3">
                     <h3>Enfermedad Vectorial</h3>
                     <div class="d-flex flex-column">
                         <div class="d-flex flex-row checkbox-dcz">
                             <p>Dengue</p>
-                            <input type="checkbox">
+                            <input type="checkbox" [checked]="dengue">
                         </div>
                         <div class="d-flex flex-row checkbox-dcz">
                             <p>Chikungunya</p>
-                            <input type="checkbox">
+                            <input type="checkbox" [checked]="chingu">
                         </div>
                         <div class="d-flex flex-row checkbox-dcz">
                             <p>Zika</p>
-                            <input type="checkbox">
+                            <input type="checkbox" [checked]="zika">
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card p-3">
                     <h3>Fecha de notificación</h3>
                     <div class="d-flex flex-row">
                         <div class="d-flex flex-column txt-number-dcz">
                             <p>Día</p>
-                            <input type="number">
+                            <input type="number" [value]="fecha_dia">
                         </div>
                         <div class="d-flex flex-column txt-number-dcz">
                             <p>Mes</p>
-                            <input type="number">
+                            <input type="number" [value]="fecha_mes">
                         </div>
                         <div class="d-flex flex-column txt-number-dcz">
                             <p>Año</p>
-                            <input type="number">
+                            <input type="number" [value]="fecha_anio">
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="mt-1 d-flex flex-row-reverse">
+                <button class="btn btn-success" matStepperNext>Siguiente</button>
             </div>
         </mat-step>
         <mat-step>
@@ -54,38 +62,45 @@
             <div>
                 <h2>Ubicación de la Uidad Notificadora</h2>
                 <div class="d-flex flex-row flex-wrap">
-                    <div class="card m-1">
+                    <div class="card p-3 m-1">
                         <p>Área de Salud</p>
-                        <input type="text">
+                        <select [value]="area">
+                            <option value="1">Chimaltenango</option>
+                            <option value="2"></option>
+                            <option value="3">Chimaltenango</option>
+                        </select>
                     </div>
-                    <div class="card m-1">
+                    <div class="card p-3 m-1">
                         <p>Distrito</p>
                         <input type="text">
                     </div>
-                    <div class="card m-1">
+                    <div class="card p-3 m-1">
                         <p>Servicio</p>
                         <input type="text">
                     </div>
-                    <div class="card m-1">
+                    <div class="card p-3 m-1">
                         <p>Otro</p>
                         <input type="text">
                     </div>
                 </div>
+            </div>
+            <div class="mt-1 d-flex flex-row-reverse">
+                <button class="btn btn-success" matStepperNext>Siguiente</button>
             </div>
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Datos Paciente</ng-template>
             <h2>Datos Paciente</h2>
             <div class="d-flex flex-row flex-wrap">
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <p>Apellido(s)</p>
                     <input type="text">
                 </div>
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <p>Nombre</p>
                     <input type="text">
                 </div>
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <p>Sexo</p>
                     <div class="d-flex flex-column">
                         <div class="d-flex flex-row checkbox-dcz">
@@ -98,7 +113,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <p>Fecha de Nacimiento</p>
                     <input type="date">
 
@@ -119,41 +134,41 @@
                     </div>
                 </div>
 
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <p>Departamento: </p>
                     <select>
 
                     </select>
                 </div>
 
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <p>Municipio: </p>
                     <select>
 
                     </select>
                 </div>
 
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <p>Comnidad/localidad/poblado</p>
                     <input type="text">
                 </div>
 
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <p>Teléfono</p>
                     <input type="text">
                 </div>
 
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <p>Correo electrónico</p>
                     <input type="text">
                 </div>
 
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <p>Dirección completa</p>
                     <input type="text">
                 </div>
 
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <p>Grupo Étnico: </p>
                     <select>
 
@@ -168,7 +183,7 @@
             <ng-template matStepLabel>Datos Clínicos</ng-template>
             <h2>Datos Clínicos</h2>
             <div class="d-flex flex-row flex-wrap">
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <h3>Fecha Inicio Síntomas</h3>
                     <div class="d-flex flex-row">
                         <div class="d-flex flex-column txt-number-dcz">
@@ -189,7 +204,7 @@
                     <input type="number">
                 </div>
 
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <h3>Fecha Primera Consulta</h3>
                     <div class="d-flex flex-row">
                         <div class="d-flex flex-column txt-number-dcz">
@@ -210,7 +225,7 @@
                     <input type="number">
                 </div>
 
-                <div class="card m-1">
+                <div class="card p-3 m-1">
                     <div class="d-flex flex-row justify-content-between checkbox-dcz">
                         <h3>Hospitalizado</h3>
                         <input type="checkbox">
@@ -244,7 +259,7 @@
             <ng-template matStepLabel>Signos y Síntomas</ng-template>
             <h3>Signos y Síntomas</h3>
             <div class="d-flex flex-row flex-wrap">
-                <div class="card m-1 d-flex flex-row checkbox-dcz" *ngFor="let signo of list_signossintomas">
+                <div class="card  p-3 m-1 d-flex flex-row checkbox-dcz" *ngFor="let signo of list_signossintomas">
                     <p>{{signo.nombre}}</p>
                     <input type="checkbox" [checked]="signo.check">
                 </div>

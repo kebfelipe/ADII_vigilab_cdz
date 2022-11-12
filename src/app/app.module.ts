@@ -3,23 +3,26 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegistrarFichaComponent } from './pages/registrar-ficha/registrar-ficha.component';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrarFichaComponent,
+    LoginLayoutComponent,
+    AdminLayoutComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    MatStepperModule
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,6 +9,20 @@ export class RegistrarFichaComponent implements OnInit {
 
   constructor() { }
 
+
+  dengue = false;
+  chingu = false;
+  zika = false;
+
+  fecha =  new Date();
+  fecha_dia = this.fecha.getDate();
+  fecha_mes = this.fecha.getMonth();
+  fecha_anio = this.fecha.getFullYear();
+
+  area = 0;
+  distrito = 0;
+
+
   list_signossintomas: any[] = [
     { id: 0, nombre: "Fiebre", check: false },
     { id: 1, nombre: "Conjuntivitis no purulenta", check: false },
@@ -37,6 +51,8 @@ export class RegistrarFichaComponent implements OnInit {
     { id: 24, nombre: "Artritis", check: false },
     { id: 25, nombre: "Manifestaciones neurológicas", check: false },
   ];
+
+
 
   ngOnInit(): void {
   }
