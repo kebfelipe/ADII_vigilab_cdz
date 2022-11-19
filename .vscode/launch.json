@@ -8,6 +8,6 @@
       "name": "Angular cdz",
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}"
-  },
+    },
   ]
 }

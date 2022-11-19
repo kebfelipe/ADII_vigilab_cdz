@@ -6,7 +6,7 @@
     <h2>Registrar Ficha</h2>
     <div class="d-flex flex-row justify-content-around">
         <div class="card p-3">
-            <p class="m-0 p-0">Fecha: <strong>09-NOV-2022</strong> </p>
+            <p class="m-0 p-0">Fecha: <strong>{{fecha | date:'dd-MM-yyyy'}}</strong> </p>
         </div>
         <div class="card p-3">
             <p class="m-0 p-0">No. Ficha <strong>#0</strong></p>
@@ -23,15 +23,15 @@
                     <div class="d-flex flex-column">
                         <div class="d-flex flex-row checkbox-dcz">
                             <p>Dengue</p>
-                            <input type="checkbox" [checked]="dengue">
+                            <input type="checkbox" [checked]="ficha.general.dengue">
                         </div>
                         <div class="d-flex flex-row checkbox-dcz">
                             <p>Chikungunya</p>
-                            <input type="checkbox" [checked]="chingu">
+                            <input type="checkbox" [checked]="ficha.general.chingu">
                         </div>
                         <div class="d-flex flex-row checkbox-dcz">
                             <p>Zika</p>
-                            <input type="checkbox" [checked]="zika">
+                            <input type="checkbox" [checked]="ficha.general.zika">
                         </div>
                     </div>
                 </div>
@@ -62,22 +62,39 @@
             <div>
                 <h2>Ubicación de la Uidad Notificadora</h2>
                 <div class="d-flex flex-row flex-wrap">
-                    <div class="card p-3 m-1">
-                        <p>Área de Salud</p>
-                        <input type="text" value="Chimaltenango">
+                    <div class="card p-3 d-flex flex-row flex-wrap">
+
+                        <div class="card p-3 m-1">
+                            <p>Área de Salud</p>
+                            <select [value]="ficha.ubicacion.area" [disabled]="ficha.ubicacion.otro_check">
+                                <option *ngFor="let item of area_salud" [value]="item"> {{item.nombre}} </option>
+                            </select>
+                        </div>
+                        <div class="card p-3 m-1">
+                            <p>Distrito</p>
+                            <select [value]="ficha.ubicacion.area" [disabled]="ficha.ubicacion.otro_check">
+                                <option *ngFor="let item of distrito" [value]="item"> {{item.nombre}} </option>
+                            </select>
+                        </div>
+                        <div class="card p-3 m-1">
+                            <p>Servicio</p>
+                            <select [value]="ficha.ubicacion.area" [disabled]="ficha.ubicacion.otro_check">
+                                <option *ngFor="let item of servicios" [value]="item"> {{item.nombre}} </option>
+                            </select>
+                        </div>
                     </div>
+
+
                     <div class="card p-3 m-1">
-                        <p>Distrito</p>
-                        <input type="text" value="Hospital de Chimaltenango">
+                        <div class="d-flex flex-row justify-content-between checkbox-dcz">
+                            <p>Otro</p>
+                            <input type="checkbox" [checked]="ficha.ubicacion.otro_check"
+                                (change)="ficha.ubicacion.otro_check = !ficha.ubicacion.otro_check">
+                        </div>
+                        <input type="text" [disabled]="!ficha.ubicacion.otro_check" [value]="ficha.ubicacion.otro">
                     </div>
-                    <div class="card p-3 m-1">
-                        <p>Servicio</p>
-                        <input type="text" value="Encamamiento Hombres">
-                    </div>
-                    <div class="card p-3 m-1">
-                        <p>Otro</p>
-                        <input type="text">
-                    </div>
+
+
                 </div>
             </div>
             <div class="mt-1 d-flex flex-row-reverse">
@@ -87,64 +104,78 @@
         <mat-step>
             <ng-template matStepLabel>Datos Paciente</ng-template>
             <h2>Datos Paciente</h2>
+            <div class="card p-3 m-1" style="width: 280px;">
+                <div class="d-flex flex-row justify-content-between checkbox-dcz">
+                    <p>DPI</p>
+                    <input type="checkbox" [checked]="ficha.paciente.dpi_check"
+                        (change)="ficha.paciente.dpi_check = !ficha.paciente.dpi_check">
+                </div>
+                <div class="d-flex flex-row w-100">
+                    <input type="text" [disabled]="!ficha.paciente.dpi_check" [value]="ficha.paciente.dpi">
+                    <button [disabled]="!ficha.paciente.dpi_check" class="btn btn-info ms-1"
+                        (click)="verpersona()">Buscar</button>
+                </div>
+            </div>
             <div class="d-flex flex-row flex-wrap">
                 <div class="card p-3 m-1">
                     <p>Apellido(s)</p>
-                    <input type="text">
+                    <input type="text" style="width: 400px;">
                 </div>
                 <div class="card p-3 m-1">
                     <p>Nombre</p>
-                    <input type="text">
+                    <input type="text" style="width: 400px;">
                 </div>
                 <div class="card p-3 m-1">
                     <p>Sexo</p>
                     <div class="d-flex flex-column">
                         <div class="d-flex flex-row checkbox-dcz">
                             <p>Femenino</p>
-                            <input type="checkbox">
+                            <input type="checkbox" [checked]="ficha.paciente.sexo == 1"
+                                (click)="ficha.paciente.sexo = 1">
                         </div>
                         <div class="d-flex flex-row checkbox-dcz">
                             <p>Masculino</p>
-                            <input type="checkbox">
+                            <input type="checkbox" [checked]="ficha.paciente.sexo == 2"
+                                (click)="ficha.paciente.sexo = 2">
                         </div>
                     </div>
                 </div>
                 <div class="card p-3 m-1">
                     <p>Fecha de Nacimiento</p>
-                    <input type="date">
+                    <input type="date" [value]="ficha.paciente.nacimiento">
 
-                    <p>Fecha de Nacimiento</p>
+                    <!-- <p>Fecha de Nacimiento</p>
                     <div class="d-flex flex-row">
                         <div class="d-flex flex-column txt-number-dcz">
                             <p>Año</p>
-                            <input type="number">
+                            <input type="number" [value]="getyear()">
                         </div>
                         <div class="d-flex flex-column txt-number-dcz">
                             <p>Mes</p>
-                            <input type="number">
+                            <input type="number" [disabled]="true">
                         </div>
                         <div class="d-flex flex-column txt-number-dcz">
                             <p>Día</p>
-                            <input type="number">
+                            <input type="number" [disabled]="true">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="card p-3 m-1">
                     <p>Departamento: </p>
                     <select>
-
+                        <option *ngFor="let item of departamento" [value]="item">{{item.nombre}}</option>
                     </select>
                 </div>
 
                 <div class="card p-3 m-1">
                     <p>Municipio: </p>
                     <select>
-
+                        <option *ngFor="let item of municipio" [value]="item">{{item.nombre}}</option>
                     </select>
                 </div>
 
-                <div class="card p-3 m-1">
+                <div class="card p-3 m-1" style="width: 400px;">
                     <p>Comnidad/localidad/poblado</p>
                     <input type="text">
                 </div>
@@ -159,7 +190,7 @@
                     <input type="text">
                 </div>
 
-                <div class="card p-3 m-1">
+                <div class="card p-3 m-1" style="width: 400px;">
                     <p>Dirección completa</p>
                     <input type="text">
                 </div>
@@ -167,11 +198,16 @@
                 <div class="card p-3 m-1">
                     <p>Grupo Étnico: </p>
                     <select>
-
+                        <option *ngFor="let item of etnias" [value]="item">{{item.nombre}}</option>
                     </select>
 
                     <p>Otro</p>
-                    <input type="text">
+                    <div class="d-flex flex-row justify-content-between checkbox-dcz">
+                        <p>Otro</p>
+                        <input type="checkbox" [checked]="ficha.paciente.otro_etnia_check"
+                            (change)="ficha.paciente.otro_etnia_check = !ficha.paciente.otro_etnia_check">
+                    </div>
+                    <input type="text" [disabled]="!ficha.paciente.otro_etnia_check">
                 </div>
             </div>
             <div class="mt-1 d-flex flex-row-reverse">
@@ -184,7 +220,8 @@
             <div class="d-flex flex-row flex-wrap">
                 <div class="card p-3 m-1">
                     <h3>Fecha Inicio Síntomas</h3>
-                    <div class="d-flex flex-row">
+                    <input type="date" [value]="ficha.paciente.nacimiento">
+                    <!-- <div class="d-flex flex-row">
                         <div class="d-flex flex-column txt-number-dcz">
                             <p>Día</p>
                             <input type="number">
@@ -197,7 +234,7 @@
                             <p>Año</p>
                             <input type="number">
                         </div>
-                    </div>
+                    </div> -->
 
                     <p>Días con síntomas</p>
                     <input type="number">
@@ -205,8 +242,8 @@
 
                 <div class="card p-3 m-1">
                     <h3>Fecha Primera Consulta</h3>
-                    <div class="d-flex flex-row">
-                        <div class="d-flex flex-column txt-number-dcz">
+                    <input type="date">
+                    <!-- <div class="d-flex flex-column txt-number-dcz">
                             <p>Día</p>
                             <input type="number">
                         </div>
@@ -217,19 +254,18 @@
                         <div class="d-flex flex-column txt-number-dcz">
                             <p>Año</p>
                             <input type="number">
-                        </div>
-                    </div>
+                        </div> -->
 
-                    <p>Días con síntomas</p>
-                    <input type="number">
                 </div>
 
                 <div class="card p-3 m-1">
                     <div class="d-flex flex-row justify-content-between checkbox-dcz">
                         <h3>Hospitalizado</h3>
-                        <input type="checkbox">
+                        <input type="checkbox" [checked]="ficha.clinicos.check_hospital"
+                            (change)="ficha.clinicos.check_hospital = !ficha.clinicos.check_hospital">
                     </div>
-                    <div class="d-flex flex-row">
+                    <input type="date" [disabled]="!ficha.clinicos.check_hospital">
+                    <!-- <div class="d-flex flex-row">
                         <div class="d-flex flex-column txt-number-dcz">
                             <p>Día</p>
                             <input type="number">
@@ -242,15 +278,10 @@
                             <p>Año</p>
                             <input type="number">
                         </div>
-                    </div>
+                    </div> -->
 
                     <p>Dónde</p>
-                    <select>
-
-                    </select>
-
-                    <p>Otro</p>
-                    <input type="text">
+                    <input type="text" [disabled]="!ficha.clinicos.check_hospital">
                 </div>
 
             </div>
@@ -267,6 +298,177 @@
                     <input type="checkbox" [checked]="signo.check">
                 </div>
             </div>
+            <div class="mt-1 d-flex flex-row-reverse">
+                <button class="btn btn-success" matStepperNext>Siguiente</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Factores de Riesgo</ng-template>
+            <div class="w-100 d-flex flex-wrap">
+                <div class="card p-3 m-1" style="width: 400px;">
+                    <h3>Viajó en los ultimos 15 días previos al inicio de los síntomas</h3>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Si</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p1 == 1" (click)="ficha.riesgo.p1 = 1">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>No</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p1 == 2" (click)="ficha.riesgo.p1 = 2">
+                        </div>
+                    </div>
+
+                    <p>Dónde</p>
+                    <input type="text" [disabled]="!(ficha.riesgo.p1 == 1)">
+                </div>
+
+                <div class="card p-3 m-1" style="width: 400px;">
+                    <h3>Recibió sangre en los últimos días previos al inicio de los síntomas</h3>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Si</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p2 == 1" (click)="ficha.riesgo.p2 = 1">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>No</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p2 == 2" (click)="ficha.riesgo.p2 = 2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-3 m-1" style="width: 400px;">
+                    <h3>¿Hay otros enfermos con los mismos síntomas en la familia? (familia, localidad, poblacíon)</h3>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Si</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p3 == 1" (click)="ficha.riesgo.p3 = 1">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>No</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p3 == 2" (click)="ficha.riesgo.p3 = 2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-3 m-1" style="width: 400px;">
+                    <h3>¿Almacena agua en pilas, toneles, u otros recipientes?</h3>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Si</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p4 == 1" (click)="ficha.riesgo.p4 = 1">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>No</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p4 == 2" (click)="ficha.riesgo.p4 = 2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-3 m-1" style="width: 400px;">
+                    <h3>Ha tenido dengue anteriormente</h3>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Si</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p5 == 1" (click)="ficha.riesgo.p5 = 1">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>No</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p5 == 2" (click)="ficha.riesgo.p5 = 2">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>No sabe</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p5 == 3" (click)="ficha.riesgo.p5 = 3">
+                        </div>
+
+                        <p>¿Cuando?</p>
+                        <input type="date" [disabled]="!(ficha.riesgo.p1 == 1)">
+                    </div>
+                </div>
+
+                <div class="card p-3 m-1" style="width: 400px;">
+                    <h3>Ubicación de la vivienda</h3>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Urbana</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p6 == 1" (click)="ficha.riesgo.p6 = 1">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Rural</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p6 == 2" (click)="ficha.riesgo.p6 = 2">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Urbana-rural</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p6 == 3" (click)="ficha.riesgo.p6 = 3">
+                        </div>
+
+                        <p>No de habitantes por casa</p>
+                        <input type="number">
+                    </div>
+                </div>
+
+                <div class="card p-3 m-1" style="width: 400px;">
+                    <h3>¿Hay chatarra, recipientes inútiles y/o llantas en su patio o alrededores?</h3>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Si</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p7 == 1" (click)="ficha.riesgo.p7 = 1">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>No</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p7 == 2" (click)="ficha.riesgo.p7 = 2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-3 m-1" style="width: 400px;">
+                    <h3>Ubicación vivienda menos 100 metros de: cementerio, chatarrera y llanteras</h3>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Si</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p8 == 1" (click)="ficha.riesgo.p8 = 1">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>No</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p8 == 2" (click)="ficha.riesgo.p8 = 2">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card p-3 m-1" style="width: 400px;">
+                    <h3>vivienda cerrada a la vecindad</h3>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Si</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p9 == 1" (click)="ficha.riesgo.p9 = 1">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>No</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p9 == 2" (click)="ficha.riesgo.p9 = 2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-3 m-1" style="width: 400px;">
+                    <h3>Disponibilidad de agua domiciliar</h3>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>Si</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p10 == 1" (click)="ficha.riesgo.p10 = 1">
+                        </div>
+                        <div class="d-flex flex-row checkbox-dcz">
+                            <p>No</p>
+                            <input type="checkbox" [checked]="ficha.riesgo.p10 == 2" (click)="ficha.riesgo.p10 = 2">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="mt-1 d-flex flex-row-reverse">
+                <button class="btn btn-success" (click)="guardar()">Guardar Ficha</button>
+            </div>
+
         </mat-step>
     </mat-stepper>
 </div>

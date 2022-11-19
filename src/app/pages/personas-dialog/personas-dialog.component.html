@@ -1,0 +1,32 @@
+<div class="d-flex flex-row justify-content-between">
+    <h2 class="mb-0 pb-0">Buscar Persona</h2>
+    <button class="btn btn-danger">X</button>
+</div>
+<div class="card p-3 m-3">
+    <div class="d-flex flex-row">
+        <p class="p-0 m-0 me-1">Buscar</p>
+        <input type="text" (keyup)="filtrar($event)">
+    </div>
+
+    <div class="mt-1">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>No.</td>
+                    <td>Nombre</td>
+                    <td>DPI</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of personas">
+                    <td>{{item.no}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.dpi}}</td>
+                    <td><button class="btn btn-info" (click)="onNoClick()">Seleccionar</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

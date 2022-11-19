@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { RegistrarFichaComponent } from 'src/app/pages/registrar-ficha/registrar-ficha.component';
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbAlertModule, NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,7 +25,8 @@ import { VerfichasComponent } from 'src/app/pages/verfichas/verfichas.component'
     ReactiveFormsModule,
 
     MatStepperModule,
-
+    MatDialogModule,
+    
     FontAwesomeModule,
 
   ],
